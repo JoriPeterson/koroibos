@@ -5,5 +5,7 @@ FactoryBot.define do
     age { 1 }
     sport { "MyString" }
     total_medals_won { 1 }
+    weight { 1 }
+    sex { "MyString" }
   end
 end
