@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_11_04_021358) do
     t.integer "age"
     t.string "sport"
     t.integer "total_medals_won"
+    t.integer "weight"
+    t.string "sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -17,7 +17,9 @@ task import: :environment do
         team: row["team"],
         age: row["age"],
         sport: row["sport"],
-        total_medals_won: 0
+        total_medals_won: 0,
+        weight: row["weight"],
+        sex: row["sex"],
       }
     end
 
