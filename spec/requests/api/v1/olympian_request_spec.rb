@@ -18,4 +18,26 @@ describe "Olympians API" do
 		expect(olympians.count).to eq(4)
     expect(olympians[0]['attributes']['name']).to eq("John")
   end
+
+  it "gets the youngest olympian" do
+
+    get '/api/v1/olympians?age=youngest'
+
+    youngest = JSON.parse(response.body)['data']
+
+    expect(response).to be_successful
+    expect(youngest['attributes']['name']).to eq("George")
+    expect(youngest['attributes']['age']).to eq(21)
+  end
+
+  it "gets the oldest olympian" do
+
+    get '/api/v1/olympians?age=oldest'
+
+    oldest = JSON.parse(response.body)['data']
+
+    expect(response).to be_successful
+    expect(oldest['attributes']['name']).to eq("Pierre")
+    expect(oldest['attributes']['age']).to eq(28)
+  end
 end
