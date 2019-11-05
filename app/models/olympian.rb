@@ -27,4 +27,11 @@ class Olympian < ApplicationRecord
   def self.average_age
     average(:age).round(1).to_f
   end
+
+  def self.all_medalists(event_id)
+    select(:id, :name, :team, :age, :medal, :event, "events.id")
+    .joins("JOIN events ON olympians.event = events.event")
+    .where("events.id = ?", event_id)
+    .where(medal: ["Gold","Silver","Bronze"])
+  end
 end
