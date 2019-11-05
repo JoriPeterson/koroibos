@@ -18,12 +18,10 @@ task import: :environment do
     sport_id = sports_hash[row['sport']]
     events[row['event']] = {
       sport_id: sport_id,
-      event: row['event'],
-      medal: row['medal']
+      event: row['event']
     }
   end
   Event.import(events.values)
-
 
   olympians = {}
   CSV.foreach('db/csv_data/olympians.csv', headers: true) do |row|
@@ -38,6 +36,7 @@ task import: :environment do
         weight: row["weight"],
         sex: row["sex"],
         medal: row["medal"],
+        event: row["event"]
       }
     end
 
