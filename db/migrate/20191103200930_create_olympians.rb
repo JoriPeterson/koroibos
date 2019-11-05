@@ -8,6 +8,7 @@ class CreateOlympians < ActiveRecord::Migration[5.2]
       t.integer :total_medals_won
       t.integer :weight
       t.string :sex
+      t.string :event
       t.string :medal
 
       t.timestamps

@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2019_11_04_233309) do
 
   create_table "events", force: :cascade do |t|
     t.string "event"
-    t.string "medal"
     t.bigint "sport_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -32,6 +31,7 @@ ActiveRecord::Schema.define(version: 2019_11_04_233309) do
     t.integer "total_medals_won"
     t.integer "weight"
     t.string "sex"
+    t.string "event"
     t.string "medal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
