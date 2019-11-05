@@ -50,9 +50,45 @@ describe "Olympians API" do
     expect(response).to be_successful
 
     expect(stats['attributes']['olympian_stats']['total_competing_olympians']).to eq(4)
-    # expect(stats['attributes']['olympian_stats']['female_olympians']).to eq(65.0)
-    # expect(stats['attributes']['olympian_stats']['male_olympians']).to eq(75.0)
     expect(stats['attributes']['olympian_stats'].values.last).to eq(24.8)
   end
 
+  it "can find an olympian by name" do
+
+    get "/api/v1/olympians/find?name=#{@olympian_1.name}"
+
+		olympian = JSON.parse(response.body)['data']
+
+		expect(response).to be_successful
+    expect(olympian['attributes']['name']).to eq("John")
+  end
+
+  it "can find all olympians by team" do
+
+    get "/api/v1/olympians/find_all?team=USA"
+
+    olympians = JSON.parse(response.body)['data']
+
+		expect(response).to be_successful
+    expect(olympians[0]['attributes']['team']).to eq("USA")
+    expect(olympians[1]['attributes']['team']).to eq("USA")
+  end
+
+  it "it sends error message if attribute doesn't exist" do
+
+    get "/api/v1/olympians/find_all?team=Spain"
+
+    olympians = JSON.parse(response.body)
+
+    expect(olympians).to eq({"error"=>"Attribute does not exist"})
+  end
+
+  it "it sends error message if attribute doesn't exist for single olympian" do
+
+    get "/api/v1/olympians/find?team=Spain"
+
+    olympian = JSON.parse(response.body)
+
+    expect(olympian).to eq({"error"=>"Attribute does not exist"})
+  end
 end
