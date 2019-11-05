@@ -2,7 +2,7 @@
 
 ### Description
 
-This is a 48 hour code challenge to build an Olympics Analytics tracker. It includes historical data from the 2016 Summer Games. Currently, five endpoints are built out for all olympians, youngest_olympian, oldest_olympians, olympian_stats and all events.
+This is a 48 hour code challenge to build an Olympics Analytics tracker. It includes historical data from the 2016 Summer Games. Currently, five main endpoints are built out for all olympians, youngest_olympian, oldest_olympians, olympian_stats and all events. Additionally, find and find_all endpoints have been added to find Olympians by their attributes.
 
 This application is built in Ruby on Rails and deployed to Heroku [here](https://intense-lake-33626.herokuapp.com/api/v1/olympians)
 
@@ -177,6 +177,77 @@ Example Response:
     {...}
   ]
 }
+```
+
+### Additional Requests
+
+**Find Olympian by Attribute**
+
+Example Request:
+`GET '/api/v1/olympians/find=?name=Andreea Aanei'`
+
+Example Response:
+```
+{
+  "data": {
+    "id": "1",
+    "type": "find",
+    "attributes": {
+      "name": "Andreea Aanei",
+      "team": "Romania",
+      "age": 22,
+      "sport": "Weightlifting",
+      "total_medals_won": 0,
+      "weight": 125,
+      "sex": "F",
+      "medal": "NA"
+    }
+  }
+}
+```
+
+
+**Find All Olympians by Attributes**
+
+Example Request:
+`GET '/api/v1/olympians/find_all?team=United States'`
+
+Example Response:
+```
+{
+  "data": [
+    {
+      "id": "12",
+      "type": "find",
+      "attributes": {
+        "name": "Mara Katherine Abbott",
+        "team": "United States",
+        "age": 30,
+        "sport": "Cycling",
+        "total_medals_won": 0,
+        "weight": 52,
+        "sex": "F",
+        "medal": "NA"
+    }
+},
+{
+    "id": "92",
+    "type": "find",
+    "attributes": {
+        "name": "Natalie Cammile Adams (-Brannan)",
+        "team": "United States",
+        "age": 24,
+        "sport": "Swimming",
+        "total_medals_won": 0,
+        "weight": 65,
+        "sex": "F",
+        "medal": "NA"
+        }
+      },
+      {...}
+    ]
+  }
+
 ```
 
 ### Next Challenge:
