@@ -1,12 +1,34 @@
 require 'csv'
 
 task import: :environment do
+  # CSV.foreach('db/csv_data/olympians.csv', headers: true) do |row|
+  #   if row["medal"] == "NA"
+  #     row["medal"] = nil
+  #   end
+  #   Olympian.create!(row.to_hash)
+  # end
+
+  sports = {}
   CSV.foreach('db/csv_data/olympians.csv', headers: true) do |row|
-    if row["medal"] == "NA"
-      row["medal"] = nil
+    sports[row['sport']] =
+      {
+        sport: row['sport']
+      }
     end
-    Olympian.create!(row.to_hash)
+  Sport.import(sports.values)
+
+
+  sports_hash = Sport.pluck(:sport, :id).to_h
+  events = {}
+  CSV.foreach('db/csv_data/olympians.csv', headers: true) do |row|
+    sport_id = sports_hash[row['sport']]
+    events[row['event']] = {
+      sport_id: sport_id,
+      event: row['event']
+    }
   end
+  Event.import(events.values)
+
 
   athletes = {}
   CSV.foreach('db/csv_data/olympians.csv', headers: true) do |row|
