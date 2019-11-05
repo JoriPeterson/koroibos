@@ -1,12 +1,6 @@
 require 'csv'
 
 task import: :environment do
-  # CSV.foreach('db/csv_data/olympians.csv', headers: true) do |row|
-  #   if row["medal"] == "NA"
-  #     row["medal"] = nil
-  #   end
-  #   Olympian.create!(row.to_hash)
-  # end
 
   sports = {}
   CSV.foreach('db/csv_data/olympians.csv', headers: true) do |row|
@@ -24,16 +18,17 @@ task import: :environment do
     sport_id = sports_hash[row['sport']]
     events[row['event']] = {
       sport_id: sport_id,
-      event: row['event']
+      event: row['event'],
+      medal: row['medal']
     }
   end
   Event.import(events.values)
 
 
-  athletes = {}
+  olympians = {}
   CSV.foreach('db/csv_data/olympians.csv', headers: true) do |row|
-    if !athletes.include?(row["name"])
-      athletes[row['name']] =
+    if !olympians.include?(row["name"])
+      olympians[row['name']] =
       {
         name: row["name"],
         team: row["team"],
@@ -42,12 +37,13 @@ task import: :environment do
         total_medals_won: 0,
         weight: row["weight"],
         sex: row["sex"],
+        medal: row["medal"],
       }
     end
 
     if row["medal"] != "NA"
-      athletes[row["name"]][:total_medals_won] += 1
+      olympians[row["name"]][:total_medals_won] += 1
     end
   end
-  Athlete.import(athletes.values)
+  Olympian.import(olympians.values)
 end

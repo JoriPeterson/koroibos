@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe "Olympians API" do
   before :each do
-    @athlete_1 = create(:athlete, name: "John", team: "USA", age: 25, sport: "basketball", total_medals_won: 0, sex: "M", weight: 70)
-    @athlete_2 = create(:athlete, name: "Sarah", team: "USA", age: 25, sport: "volleyball", total_medals_won: 1, sex: "F", weight: 65)
-    @athlete_3 = create(:athlete, name: "George", team: "France", age: 21, sport: "running", total_medals_won: 2, sex: "M", weight: 80)
-    @athlete_4 = create(:athlete, name: "Pierre", team: "France", age: 28, sport: "curling", total_medals_won: 3, sex: "M", weight: 75)
+    @olympian_1 = create(:olympian, name: "John", team: "USA", age: 25, sport: "basketball", total_medals_won: 0, sex: "M", weight: 70)
+    @olympian_2 = create(:olympian, name: "Sarah", team: "USA", age: 25, sport: "volleyball", total_medals_won: 1, sex: "F", weight: 65)
+    @olympian_3 = create(:olympian, name: "George", team: "France", age: 21, sport: "running", total_medals_won: 2, sex: "M", weight: 80)
+    @olympian_4 = create(:olympian, name: "Pierre", team: "France", age: 28, sport: "curling", total_medals_won: 3, sex: "M", weight: 75)
   end
 
   it "sends a list of all olympians" do
@@ -54,5 +54,5 @@ describe "Olympians API" do
     # expect(stats['attributes']['olympian_stats']['male_olympians']).to eq(75.0)
     expect(stats['attributes']['olympian_stats'].values.last).to eq(24.8)
   end
-  
+
 end

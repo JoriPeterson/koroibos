@@ -15,20 +15,9 @@ ActiveRecord::Schema.define(version: 2019_11_04_233309) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "athletes", force: :cascade do |t|
-    t.string "name"
-    t.string "team"
-    t.integer "age"
-    t.string "sport"
-    t.integer "total_medals_won"
-    t.integer "weight"
-    t.string "sex"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "events", force: :cascade do |t|
     t.string "event"
+    t.string "medal"
     t.bigint "sport_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,14 +26,12 @@ ActiveRecord::Schema.define(version: 2019_11_04_233309) do
 
   create_table "olympians", force: :cascade do |t|
     t.string "name"
-    t.string "sex"
-    t.integer "age"
-    t.integer "height"
-    t.integer "weight"
     t.string "team"
-    t.string "games"
+    t.integer "age"
     t.string "sport"
-    t.string "event"
+    t.integer "total_medals_won"
+    t.integer "weight"
+    t.string "sex"
     t.string "medal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
